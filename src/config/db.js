@@ -1,3 +1,4 @@
+
 import mongoose from 'mongoose';
 import logger from '../utils/logger.js';
 
@@ -11,11 +12,15 @@ export const connectDB = async (uri = process.env.MONGODB_URI) => {
   }
 
   try {
+    logger.info(`MongoDB database name from URI: ${new URL(uri).pathname}`);
     const conn = await mongoose.connect(uri, {
       autoIndex: true
     });
 
-    logger.info(`MongoDB connected successfully: ${conn.connection.host}/${conn.connection.name}`);
+    logger.info(
+      `MongoDB connected successfully: ${conn.connection.host}/${conn.connection.name}`
+    );
+
     return conn;
   } catch (error) {
     logger.error(`MongoDB connection error: ${error.message}`);
