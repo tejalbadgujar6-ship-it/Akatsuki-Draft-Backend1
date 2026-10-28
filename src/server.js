@@ -52,9 +52,10 @@ const startServer = async () => {
       server.close(() => process.exit(1));
     });
   } catch (error) {
-    logger.error('Failed to initialize server:', error);
-    process.exit(1);
-  }
+  console.error('Failed to initialize server:', error.message);
+  console.error(error.stack);
+  process.exit(1);
+}
 };
 
 startServer();
